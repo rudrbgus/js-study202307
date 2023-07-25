@@ -8,3 +8,6 @@ console.log(num ** 4);
 let x = 5;
 x++;
 console.log(x);
+
+const str = 'hello' * 5.5;
+console.log(`str: ${str}`);
