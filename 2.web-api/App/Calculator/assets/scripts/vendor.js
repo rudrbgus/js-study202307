@@ -10,6 +10,8 @@ const $divideBtn = document.getElementById('btn-divide');
 const $currentResultOutput = document.getElementById('current-result');
 const $currentCalculationOutput = document.getElementById('current-calculation');
 
+const $logBox = document.getElementById('logBox');
+const $logBoxUl = document.getElementById('logBoxUl');
 
 
 function outputResult(result, text) {

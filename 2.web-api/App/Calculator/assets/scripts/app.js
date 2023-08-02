@@ -8,6 +8,7 @@ const logEntries = [];
 
 // 현재 계산기에 그려질 숫자
 let currentResult = 0;
+let logCount = 0;
 
 
 // 로그 이력을 만드는 함수
@@ -20,6 +21,20 @@ const writeToLog = (operation, prevResult, number, result) =>{
         result
     };
     logEntries.push(logObject);
+    ++logCount;
+    const logs = document.createElement('li');
+    let operate = '';
+    if(operation ==='ADD'){
+        operate='+';
+    }else if(operation ==='SUB'){
+        operate='-';
+    }else if(operation ==='MULTI'){
+        operate='*';
+    }else{
+        operate='/';
+    }
+    logs.textContent = `${logCount}번째 연산결과: ${prevResult} ${operate} ${number} = ${result}`;
+    $logBoxUl.appendChild(logs);
     console.log(logEntries);
 };
 
