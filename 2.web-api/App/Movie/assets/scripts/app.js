@@ -44,7 +44,8 @@ const closeAddModal = () =>{
 //화면에 새로운 영화정보를 랜더링하는 함수
 const renderNewMovie = newMovie => {
     const $newMovie = document.createElement('li');
-    $newMovie.classList.add('mvoie-element');
+    $newMovie.classList.add('movie-element');
+    $newMovie.dataset.movieId = newMovie.id;
 
     $newMovie.innerHTML = `
     <div class="movie-element__image">
@@ -55,9 +56,48 @@ const renderNewMovie = newMovie => {
       <p>${newMovie.rating} / 5</p>
     </div>
   `;
+    //삭제를 진행하는 핸들러
+    const deleteMovieHandler = e =>{
+        // $movieList.removeChild($newMovie);
+        //실제 li 지우기
+        // e.target.closest('.movie-element').remove();
 
+        // 배열에서도 영화 정보를 지워야 함!
+        // 클릭한 태그의 movie-id값 가져오기
+        const movieId = e.target.closest('.movie-element').dataset.movieId;
+        console.log(movieId);
 
+        // 배열에서 해당 아이디값을 가지는 객체를 찾아내기 인덱스를 알아내기
+        // let index = -1;
+        // for(let i = 0; i <movies.length; i++){
+        //     if(movies[i].id === movieId){
+        //         index = i;
+        //         break;
+        //     }
+        // }
+
+        // 대상의 인덱스 찾기
+        // findIndex: 배열 고차함수
+        const index = movies.findIndex(m => m.id === movieId);
+        // 그 객체를 배열에서 지우기
+        movies.splice(index, 1);
+    }
+
+    // 삭제 클릭 이벤트
+    $newMovie.addEventListener('click', deleteMovieHandler);
     $movieList.appendChild($newMovie);
+};
+
+// 영화 정보 입력란 검증
+const validateMovieInput = ({title , image, rating}) =>{
+    if(title.trim()==='' ||
+    image.trim()===''||
+    rating.trim()===''||
+    +rating <1 || +rating >5
+    ){
+        return false;
+    }
+    return true;
 };
 // ===== 이벤트 핸들러 및 이벤트 바인딩 ====== //
 
@@ -69,10 +109,17 @@ const addMovieHandler = e =>{
 
     //객체로 묶기
     const newMovie = {
+        id: Math.random().toString(),
         title : titleValue,
         image : imgUrlValue,
         rating : ratingValue
     };
+
+    // 검증
+    if(!validateMovieInput(newMovie)){
+        alert('입력값이 유효하지 않습니다');
+        return;
+    }
     movies.push(newMovie);
     console.log(movies);    
     // 모달 닫기
@@ -80,6 +127,8 @@ const addMovieHandler = e =>{
     // 화면에 입력한 영화정보 렌더링하기
     renderNewMovie(newMovie);
 };
+
+
 
 
 // 영화 추가 모달창을 띄우는 핸들러
