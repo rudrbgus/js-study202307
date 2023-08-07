@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #greet .highlight{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="greet">
+        Hello <span class="highlight">World!</span>
+    </div>
+
+    <ul id="food-item">
+        <li class="food">짜장면</li>
+        <li class="food">볶음밥</li>
+        <li class="food">파스타</li>
+    </ul>
+
+    <script>
+        const $greet = document.getElementById('greet');
+        // trim() : 앞뒤 공백 제거 함수.
+        console.log($greet.textContent.trim());
+        console.log($greet.innerHTML);
+        // $greet.firstElementChild.textContent = 'JavaScripts!';
+        $greet.innerHTML ='Hello <span class=highlight>Javascripts!</span>';
+        const $foods = document.getElementById('food-item');
+        $foods.lastElementChild.textContent = '마카롱';
+        // 태그 추가
+        $foods.innerHTML +='<li class="food">족발</li>';
+        
+        //  자식 태그 전체 삭제
+        $foods.innerHTML ='';
+        // 텍스트만 건들꺼면 textContent
+        // 아니면 innerHTML
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul class="users">
+        <li data-user-number="4321" data-role="common">뽀로로</li>
+        <li data-user-number="9999" data-role="admin">핑구</li>
+    </ul>
+
+    <script>
+        const [$ul1, $ul2] = [...document.querySelectorAll('.users li')];
+
+        const pororoNumber = +$ul1.dataset.userNumber; // userNumber는 문자열 
+        console.log(pororoNumber+13);
+        const pinguRole = $ul2.dataset.role;
+        console.log(pinguRole);
+        $ul1.dataset.role = 'gold'; //수정
+        $ul1.dataset.phoneNumber = '010-3431-3123';
+        
+        delete $ul1.dataset.phoneNumber; //삭제 :객체랑 똑 같 다
+    </script>
+</body>
+</html>
